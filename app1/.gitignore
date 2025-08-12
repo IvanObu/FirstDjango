@@ -1,0 +1,7 @@
+db.sqlite3
+.idea
+media/
+__pycache__/
+.vscode
+templates-for-Django-4-course-Home
+/Users/ivanobuhov/Desktop/Python/Django/venv
