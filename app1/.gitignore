@@ -5,5 +5,6 @@ __pycache__/
 .vscode
 .venv
 templates-for-Django-4-course-Home
+.venv/
 venv/
-venv
+.DS_Store
