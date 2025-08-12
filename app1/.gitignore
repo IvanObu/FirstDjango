@@ -6,3 +6,4 @@ __pycache__/
 .venv
 templates-for-Django-4-course-Home
 venv/
+venv
