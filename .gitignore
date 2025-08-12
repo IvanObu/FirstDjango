@@ -1,3 +1,4 @@
+DS_Store
 db.sqlite3
 .idea
 media/
@@ -8,3 +9,4 @@ templates-for-Django-4-course-Home
 .venv/
 venv/
 .DS_Store
+app1/templates-for-Django-4-course-Home

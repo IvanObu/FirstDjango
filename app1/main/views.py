@@ -1,13 +1,19 @@
+from re import M
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 def index(request):
     context = {
-        'title':'Home',
-        'content': 'Главная cраница магазина - Home'
+        'title':'Home - Глфвная',
+        'content': "Магазин мебели HOME"
     }
     return render(request, 'main/index.html', context)
 
 def about(request):
-    return HttpResponse('прив броске')
+    context = {
+        'title':'Home - О нас',
+        'content': "О нас",
+        'text_on_page': "Магазин очень классынй !!!"
+    }
+    return render(request, 'main/about.html', context)
