@@ -1,4 +1,6 @@
-DS_Store
+.DS_Store
+app1/DS_Store
+app1/media/
 db.sqlite3
 .idea
 media/

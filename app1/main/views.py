@@ -6,11 +6,10 @@ from goods.models import Categories
 
 # Create your views here.
 def index(request):
-    categories = Categories.objects.all() #Получить все категории товаров которые у нас есть
+    
     context = {
         'title':'Home - Глфвная',
         'content': "Магазин мебели HOME",
-        'categories': categories
     }
     return render(request, 'main/index.html', context)
 
