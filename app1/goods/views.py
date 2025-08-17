@@ -4,15 +4,20 @@ from goods.models import Products
 
 
 # Create your views here.
-def catalog(request, category_slug, page=1):
+def catalog(request, category_slug):
     
+    page = int(request.GET.get('page', 1))
+
     if category_slug == "vse-tovary":
         goods = Products.objects.all()
     else:
         goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
 
     pag = paginator.Paginator(goods, 3)
+    # try:
     current_page = pag.page(page)
+    # except (paginator.EmptyPage, paginator.InvalidPage):
+    #     current_page = pag.page(1)
     
     context = {
         "home": "Home - каталог",
