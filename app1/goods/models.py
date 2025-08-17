@@ -29,6 +29,7 @@ class Products(models.Model):
         db_table = 'Product'
         verbose_name = 'Продукт'
         verbose_name_plural = "Продукты"
+        ordering = ('id', ) #как фильтровать пагинацию
 
     def __str__(self):
         return f"Количество - {self.name}"
