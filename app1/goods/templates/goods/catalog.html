@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load goods_tags %}
 
@@ -77,9 +77,9 @@
                                         <p class="card-text ">
                                             {% autoescape off %}
                                             {% if product.bodyline%}
-                                            {{product.bodyline|truncatechars:100}}
+                                            {{product.bodyline|truncatechars:40}}
                                             {% else %}
-                                            {{product.description|truncatechars:100}}
+                                            {{product.description|truncatechars:40}}
                                             {% endif %}
                                             {% endautoescape %}
                                             </p>
