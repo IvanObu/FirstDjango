@@ -1,5 +1,10 @@
 {% extends "base.html" %} <!--Что расшираем-->
 {% load static %}
+
+{% block model_bascket %}
+{% include "includes/bascket_button.html" %}
+{% endblock model_bascket %}
+
 {% block content %}
     <div class="row">
         <div class="container mt-5">

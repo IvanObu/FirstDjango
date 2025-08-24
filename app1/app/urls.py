@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('main.urls', namespace='main')),
     path('catalog/', include('goods.urls', namespace='catalog')),
     path('user/', include('users.urls', namespace='user')),
+    path('bascket/', include('bascket.urls', namespace='bascket')),
 ]
 
 if settings.DEBUG:
