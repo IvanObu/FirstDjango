@@ -14,13 +14,17 @@
                     <div class="input-group">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-dark btn-sm decrement"
-                                data-cart-id="" data-cart-change-url="">-</button>
+                                data-cart-id="{{item.id}}" data-cart-change-url="{% url "bascket:bascket_change" %}">
+                                {% csrf_token %}
+                                -</button>
                         </span>
                         <input type="text" class="form-control number" value="{{item.quantity}}"
                             readonly>
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-dark btn-sm increment"
-                                data-cart-id="" data-cart-change-url="">+</button>
+                                data-cart-id="{{item.id}}" data-cart-change-url="{% url "bascket:bascket_change" %}">
+                                {% csrf_token %}
+                                +</button>
                         </span>
                     </div>
                 </div>
@@ -29,7 +33,8 @@
                 </div>
                 <div class="col p-0"><strong>{{item.products_price}} $</strong></div>
                 <div class="col p-0">
-                    <a href="{% url "bascket:bascket_remove" 1%}" class="remove-from-cart" data-cart-id="">
+                    <a href="{% url "bascket:bascket_remove"%}" class="remove-from-cart" data-cart-id="{{item.id}}">
+                        {% csrf_token %}
                         <img class="mx-1" src="{% static "deps/icons/trash3-fill.svg" %}"
                             alt="Catalog Icon" width="16" height="16">
                     </a>

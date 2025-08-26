@@ -17,7 +17,8 @@ def login(request):
                 auth.login(request, user)
                 messages.success(request, f'{username}, вы вошли в аккаунт')
 
-                if request.POST.get('next', None):
+                redirect_page= request.POST.get('next', None)
+                if redirect_page and redirect_page!=reverse('user:logout'):
                      return HttpResponseRedirect(request.POST.get('next')) #редирект на нужную страницу после авторизации мы идём по указанной ссылке, а не как обычно на index
                 
                 return HttpResponseRedirect(reverse('main:index'))

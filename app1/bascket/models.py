@@ -21,7 +21,7 @@ class Bascket(models.Model):
     session_key = models.CharField(max_length=32, null=True, blank=True)
 
     class Meta:
-        db_table = "cart"
+        db_table = "bascket"
         verbose_name = "Корзина"
         verbose_name_plural = "Корзина"
     
