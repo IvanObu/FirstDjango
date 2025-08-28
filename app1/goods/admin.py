@@ -11,8 +11,22 @@ from goods.models import Categories, Products
 @admin.register(Categories)
 class CategoriesAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
-
+    list_display = [ 'name',]
 
 @admin.register(Products) 
 class ProductssAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
+    list_display = [ 'name', 'quantity', 'price', 'discount'] #теперь не str метод
+    list_editable = ['discount',]
+    search_fields = ['name', 'description']
+    list_filter = ["discount", 'quantity', 'category']
+    #поля в описании товаров
+    fields =  [
+        'name',
+        'category',
+        'slug',
+        'description',
+        'image',
+        ('price', 'discount'),
+        'quantity',
+    ]

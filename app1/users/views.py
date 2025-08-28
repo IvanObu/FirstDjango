@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.contrib import auth, messages
 from traitlets import Instance
+from bascket.models import Bascket
 from users.forms import Profileform, User_loginform, User_registrform
 from django.urls import reverse
 # Create your views here.
@@ -13,9 +14,15 @@ def login(request):
             username = request.POST['username']
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
+
+            session_key = request.session.session_key
+
             if user:
                 auth.login(request, user)
                 messages.success(request, f'{username}, вы вошли в аккаунт')
+
+                if session_key:
+                    Bascket.objects.filter(session_key=session_key).update(user=user)
 
                 redirect_page= request.POST.get('next', None)
                 if redirect_page and redirect_page!=reverse('user:logout'):
@@ -39,8 +46,15 @@ def registration(request):
         form = User_registrform(data=request.POST)
         if form.is_valid():
                 form.save()
+
+                session_key = request.session.session_key
+
                 user = form.instance
                 auth.login(request, user)
+
+                if session_key:
+                    Bascket.objects.filter(session_key=session_key).update(user=user)
+
                 messages.success(request, f'{user.username}, вы успешно зарегистрировались и вы вошли в аккаунт')
                 return HttpResponseRedirect(reverse('main:index'))
     else:

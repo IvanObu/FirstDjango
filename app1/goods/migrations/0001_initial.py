@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(blank=True, null=True, upload_to='goods_images')),
                 ('price', models.DecimalField(decimal_places=2, default=0.0, max_digits=7, verbose_name='Цена')),
                 ('discount', models.DecimalField(decimal_places=2, default=0.0, max_digits=4, verbose_name='Скидка в %')),
-                ('quality', models.PositiveBigIntegerField(default=0, verbose_name='Количество')),
+                ('quantity', models.PositiveBigIntegerField(default=0, verbose_name='Количество')),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='goods.categories', verbose_name='Категория')),
             ],
             options={

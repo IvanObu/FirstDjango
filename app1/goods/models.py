@@ -1,6 +1,7 @@
 from tabnanny import verbose
 from unicodedata import category
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Categories(models.Model):
@@ -22,7 +23,7 @@ class Products(models.Model):
     image = models.ImageField(upload_to='goods_images', null=True, blank=True)
     price = models.DecimalField(default=0.00, max_digits=7, decimal_places = 2, verbose_name = 'Цена')
     discount = models.DecimalField(default=0.00, max_digits=4, decimal_places = 2, verbose_name = 'Скидка в %')
-    quality = models.PositiveBigIntegerField(default=0, verbose_name='Количество')
+    quantity = models.PositiveBigIntegerField(default=0, verbose_name='Количество')
     category = models.ForeignKey(to=Categories, on_delete=models.CASCADE, verbose_name='Категория')
     
     class Meta:
@@ -32,11 +33,15 @@ class Products(models.Model):
         ordering = ('id', ) #как фильтровать пагинацию
 
     def __str__(self):
-        return f"Количество - {self.name}"
+        return f"{self.name}, Количество - {self.quantity}"
     
+    def get_absolute_url(self):
+        return reverse("catalog:product", kwargs={"product_slug": self.slug})
+     
 
     def display_id(self):
         return f'{self.id:05}'
+    
     
 
     def self_price(self):

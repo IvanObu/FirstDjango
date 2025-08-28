@@ -4,8 +4,10 @@ from goods.models import Products
 from users.models import User
 
 class BascketQueryset(models.QuerySet):
+    
     def total_price(self):
         return sum(cart.products_price() for cart in self)
+    
     def total_quantity(self):
         if self:
             return sum(cart.quantity for cart in self)
@@ -17,7 +19,6 @@ class Bascket(models.Model):
     product = models.ForeignKey(to=Products, on_delete=models.CASCADE, verbose_name='Товар')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='Количество')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
-
     session_key = models.CharField(max_length=32, null=True, blank=True)
 
     class Meta:
@@ -28,7 +29,10 @@ class Bascket(models.Model):
     objects = BascketQueryset().as_manager()
 
     def __str__(self):
-        return f'Корзина {self.user.username} | Товар {self.product.name} | Количество {self.quantity}'
+        if self.user:
+            return f'Корзина {self.user.username} | Товар {self.product.name} | Количество {self.quantity}'
+        
+        return f'Анонимная корзина | Товар {self.product.name} | Количество {self.quantity}'
     
     def products_price(self):
         return round(self.product.self_price() * self.quantity, 2)

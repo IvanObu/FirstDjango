@@ -9,6 +9,9 @@ from goods.models import Products
 def bascket_add(request):
 
     product_id=request.POST.get("product_id")
+
+
+
     product = Products.objects.get(id=product_id)
 
     if request.user.is_authenticated:
@@ -22,6 +25,17 @@ def bascket_add(request):
 
         else:
             Bascket.objects.create(user=request.user, product=product, quantity=1)
+    else:
+        bascket = Bascket.objects.filter(session_key=request.session.session_key, product=product)
+        if bascket.exists():
+            bascket = bascket.first()
+            if bascket:
+                bascket.quantity +=1
+                bascket.save()
+
+        else:
+            Bascket.objects.create(session_key=request.session.session_key, product=product, quantity=1)
+            
     # return redirect(request.META['HTTP_REFERER'])
     user_bascket = get_user_bascket(request)
     cart_items_html = render_to_string(
