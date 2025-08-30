@@ -1,16 +1,13 @@
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from bascket.models import Bascket
 from bascket.utils import get_user_bascket
 from goods.models import Products
-
+from django.urls import reverse
 # Create your views here.
 def bascket_add(request):
 
     product_id=request.POST.get("product_id")
-
-
 
     product = Products.objects.get(id=product_id)
 
@@ -35,7 +32,9 @@ def bascket_add(request):
 
         else:
             Bascket.objects.create(session_key=request.session.session_key, product=product, quantity=1)
-            
+    
+    
+
     # return redirect(request.META['HTTP_REFERER'])
     user_bascket = get_user_bascket(request)
     cart_items_html = render_to_string(
@@ -48,7 +47,6 @@ def bascket_add(request):
 
     return JsonResponse(response_data)
 
-    return JsonResponse(response_data)
 
 def bascket_change(request):
     bascket_id = request.POST.get("cart_id")  # получаем cart_id
@@ -62,14 +60,25 @@ def bascket_change(request):
 
     context = {"bascket": user_bascket}
 
+        # if referer page is create_order add key orders: True to context
+        
+    referer = request.META.get('HTTP_REFERER', '')
+    if reverse('orders:create_order') in referer:
+        context["order"] = True
+    else:
+        context["order"] = False  # Явно устанавливаем False
+
     cart_items_html = render_to_string(
         "bascket/includes/included_bascket.html", context, request=request)
+
+
 
     response_data = {
         "message": "Количество изменено",
         "cart_items_html": cart_items_html,
         "quantity_deleted": quantity,
     }
+    print(context)
 
     return JsonResponse(response_data)
 
@@ -84,14 +93,16 @@ def bascket_remove(request):
     user_cart = get_user_bascket(request)
 
     context = {"bascket": user_cart}
-
-    # # if referer page is create_order add key orders: True to context
-    # # referer = request.META.get('HTTP_REFERER')
-    # # if reverse('orders:create_order') in referer:
-    # #     context["order"] = True
+    
+    referer = request.META.get('HTTP_REFERER', '')
+    if reverse('orders:create_order') in referer:
+        context["order"] = True
+    else:
+        context["order"] = False  # Явно устанавливаем False
 
     cart_items_html = render_to_string(
         "bascket/includes/included_bascket.html", context, request=request)
+
 
     response_data = {
         "message": "Товар удален",

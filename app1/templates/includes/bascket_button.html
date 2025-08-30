@@ -26,11 +26,6 @@
                     <!-- Разметка корзины -->
                     {% include "bascket/includes/included_bascket.html" %}
                 </div>
-                {% if bascket%}
-                    <a class="btn btn-dark" href="{% url "orders:create_order" %}">
-                        Оформить заказ
-                    </a>
-                {% endif %}
                 
             </div>
         </div>

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from bascket.admin import BascketTabAdmin
+from orders.admin import OrderTabulareAdmin
 from users.models import User
 # Register your models here.
 
@@ -8,4 +9,4 @@ class UserAdmin(admin.ModelAdmin):
     list_display = [ 'username','first_name','last_name', 'email']
     search_fields = [ 'username','first_name','last_name', 'email']
 
-    inlines = [BascketTabAdmin,]
+    inlines = [BascketTabAdmin,OrderTabulareAdmin]

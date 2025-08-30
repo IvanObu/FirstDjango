@@ -12,6 +12,7 @@ class Categories(models.Model):
         db_table = 'Category'
         verbose_name = 'Категорию'
         verbose_name_plural = "Категории"
+        ordering = ("id",)
 
     def __str__(self):
         return f"{self.name}"
