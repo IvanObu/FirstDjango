@@ -28,6 +28,7 @@ $(document).ready(function () {
             },
             success: function (data) {
                 // Сообщение
+                console.log("Success:", data);
                 successMessage.html(data.message);
                 successMessage.fadeIn(400);
                 // Через 7сек убираем сообщение
@@ -47,6 +48,7 @@ $(document).ready(function () {
 
             error: function (data) {
                 console.log("Ошибка при добавлении товара в корзину");
+                console.log("Response:", xhr.responseText);
             },
         });
     });
@@ -156,6 +158,7 @@ $(document).ready(function () {
             success: function (data) {
                 // Сообщение
                 successMessage.html(data.message);
+                console.log("Success:", data);
                 successMessage.fadeIn(400);
                 // Через 7сек убираем сообщение
                 setTimeout(function () {
