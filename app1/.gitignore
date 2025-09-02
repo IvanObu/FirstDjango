@@ -1,0 +1,15 @@
+.DS_Store
+app1/DS_Store
+app1/media/
+db.sqlite3
+.idea
+media/
+__pycache__/
+.vscode
+.venv
+templates-for-Django-4-course-Home
+.venv/
+venv/
+.DS_Store
+app1/templates-for-Django-4-course-Home
+cache/
